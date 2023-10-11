@@ -1,4 +1,4 @@
-import { ModalProps } from "../lib/modal";
+import { ModalProps } from "../lib/types/modal.ts";
 import { useModal } from "../lib/hooks/useModal.ts";
 
 export interface ExampleProps extends ModalProps {

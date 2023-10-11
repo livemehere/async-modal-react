@@ -7,6 +7,7 @@ export default defineConfig({
     react(),
     dts({
       include: "src/lib/**/*",
+      insertTypesEntry: true,
     }),
   ],
   build: {

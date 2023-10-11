@@ -1,9 +1,9 @@
-import {createElement, ReactNode, useEffect, useRef, useState} from "react";
+import { createElement, ReactNode, useEffect, useRef, useState } from "react";
 import { ModalContext } from "../ModalContext";
-import {ModalProps, ModalType} from "../modal";
+import { ModalProps, ModalType } from "../types/modal.ts";
 import ModalContainer from "./ModalContainer";
 
-export const ModalProvider = ({ children }:{children:ReactNode}) => {
+export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
 

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import {ModalContextProps} from "./modal";
+import { ModalContextProps } from "./types/modal.ts";
 
 export const ModalContext = createContext<ModalContextProps>({
   modals: [],

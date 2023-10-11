@@ -1,6 +1,6 @@
 import { FC, useContext } from "react";
 import { ModalContext } from "../ModalContext.ts";
-import { ModalProps, ModalType } from "../modal";
+import { ModalProps, ModalType } from "../types/modal.ts";
 
 export const useModal = () => {
   const { setModals, modalIdRef } = useContext(ModalContext);
