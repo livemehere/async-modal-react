@@ -3,11 +3,20 @@ import { ModalContext } from "../ModalContext";
 import { ModalProps, ModalType } from "../types/modal.ts";
 import ModalContainer from "./ModalContainer";
 
-export const ModalProvider = ({ children }: { children: ReactNode }) => {
+interface Props {
+  children: ReactNode;
+  closeOnOutsideClick?: boolean;
+}
+
+export const ModalProvider = ({
+  children,
+  closeOnOutsideClick = true,
+}: Props) => {
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
 
   useEffect(() => {
+    if (!closeOnOutsideClick) return;
     const modalRoot = document.getElementById("modal-root");
     if (!modalRoot) return;
 
@@ -31,7 +40,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     return () => {
       window.removeEventListener("mousedown", handler);
     };
-  }, [modals]);
+  }, [modals, closeOnOutsideClick]);
 
   const showModal = modals.length > 0;
   return (
