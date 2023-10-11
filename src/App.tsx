@@ -1,13 +1,14 @@
-import ExampleModal from "./components/ExampleModal.tsx";
+import ExampleModal, { ExampleProps } from "./components/ExampleModal.tsx";
 import { useModal } from "./lib/index.ts";
 
 function App() {
   const { pushModal } = useModal();
 
   const openModal = async () => {
-    const result = await pushModal<string>(ExampleModal, {
-      name: "kong2",
+    const result = await pushModal<string, ExampleProps>(ExampleModal, {
+      name: "kong",
     });
+
     console.log(result);
   };
 

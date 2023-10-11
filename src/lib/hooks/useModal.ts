@@ -36,8 +36,12 @@ export const useModal = () => {
     setModals((prev) => prev.filter((modal) => modal.id !== id));
   };
 
+  const closeAllModals = () => {
+    setModals([]);
+  };
+
   return {
     pushModal,
-    removeModal,
+    closeAllModals,
   };
 };
