@@ -1,5 +1,5 @@
-import { ModalProps } from "../../dist/types/modal";
 import { useModal } from "../lib";
+import { ModalProps } from "../lib/types/modal";
 
 export interface ExampleProps extends ModalProps {
   name: string;
