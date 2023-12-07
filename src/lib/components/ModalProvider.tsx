@@ -62,6 +62,8 @@ export const ModalProvider = ({
     const originalStyle = window.getComputedStyle(document.body).overflow;
     if (disableBodyScrollWhenOpen && modals.length > 0) {
       document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = originalStyle;
     }
     return () => {
       document.body.style.overflow = originalStyle;
