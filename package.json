@@ -23,7 +23,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "publish": "yarn build && npm publish --access public"
+    "publish": "npm publish --access public"
   },
   "dependencies": {
     "react": "^18.2.0",
