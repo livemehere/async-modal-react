@@ -18,6 +18,7 @@ export const ModalProvider = ({
 }: Props) => {
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
+  const originStyle = useRef<string>();
 
   useEffect(() => {
     if (!closeOnOutsideClick) return;
@@ -59,18 +60,21 @@ export const ModalProvider = ({
   }, [closeOnRouteChange]);
 
   useEffect(() => {
-    let originalStyle = window.getComputedStyle(
-      document.documentElement,
-    ).overflow;
-    if (originalStyle === "hidden") originalStyle = "visible";
+    if (!originStyle.current) {
+      originStyle.current = window.getComputedStyle(
+        document.documentElement,
+      ).overflow;
+    }
 
     if (disableBodyScrollWhenOpen && modals.length > 0) {
       document.documentElement.style.overflow = "hidden";
     } else {
-      document.documentElement.style.overflow = originalStyle;
+      document.documentElement.style.overflow = originStyle.current;
     }
+
     return () => {
-      document.documentElement.style.overflow = originalStyle;
+      document.documentElement.style.overflow = originStyle.current!;
+      originStyle.current = undefined;
     };
   }, [modals, disableBodyScrollWhenOpen]);
 
