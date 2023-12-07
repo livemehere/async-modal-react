@@ -4,7 +4,11 @@ import "./index.css";
 import { ModalProvider } from "./lib/index.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <ModalProvider closeOnOutsideClick={true}>
+  <ModalProvider
+    closeOnOutsideClick={true}
+    disableBodyScrollWhenOpen={true}
+    closeOnRouteChange={true}
+  >
     <App />
   </ModalProvider>,
 );

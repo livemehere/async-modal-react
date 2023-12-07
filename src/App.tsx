@@ -13,7 +13,11 @@ function App() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        height: "200vh",
+      }}
+    >
       <h1>hello</h1>
       <button onClick={openModal}>OPEN</button>
     </div>
