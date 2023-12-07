@@ -59,14 +59,18 @@ export const ModalProvider = ({
   }, [closeOnRouteChange]);
 
   useEffect(() => {
-    const originalStyle = window.getComputedStyle(document.body).overflow;
+    let originalStyle = window.getComputedStyle(
+      document.documentElement,
+    ).overflow;
+    if (originalStyle === "hidden") originalStyle = "visible";
+
     if (disableBodyScrollWhenOpen && modals.length > 0) {
-      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = originalStyle;
+      document.documentElement.style.overflow = originalStyle;
     }
     return () => {
-      document.body.style.overflow = originalStyle;
+      document.documentElement.style.overflow = originalStyle;
     };
   }, [modals, disableBodyScrollWhenOpen]);
 
