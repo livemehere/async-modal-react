@@ -1,6 +1,6 @@
 # async-modal-react
 
-[![Version](https://img.shields.io/badge/npm-1.2.0-blue)](https://www.npmjs.com/package/async-modal-react)
+[![Version](https://img.shields.io/badge/npm-1.2.1-blue)](https://www.npmjs.com/package/async-modal-react)
 
 This is a simple solution to create a modal in React using hooks and async/await.  
 
