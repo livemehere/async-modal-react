@@ -7,12 +7,14 @@ interface Props {
   children: ReactNode;
   closeOnOutsideClick?: boolean;
   closeOnRouteChange?: boolean;
+  disableBodyScrollWhenOpen?: boolean;
 }
 
 export const ModalProvider = ({
   children,
   closeOnOutsideClick = true,
   closeOnRouteChange = true,
+  disableBodyScrollWhenOpen = true,
 }: Props) => {
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
@@ -57,6 +59,16 @@ export const ModalProvider = ({
       window.removeEventListener("popstate", handler);
     };
   }, [closeOnRouteChange]);
+
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    if (disableBodyScrollWhenOpen && modals.length > 0) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, [modals, disableBodyScrollWhenOpen]);
 
   const showModal = modals.length > 0;
   return (
