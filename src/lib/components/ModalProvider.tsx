@@ -6,11 +6,13 @@ import ModalContainer from "./ModalContainer";
 interface Props {
   children: ReactNode;
   closeOnOutsideClick?: boolean;
+  closeOnRouteChange?: boolean;
 }
 
 export const ModalProvider = ({
   children,
   closeOnOutsideClick = true,
+  closeOnRouteChange = true,
 }: Props) => {
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
@@ -41,6 +43,20 @@ export const ModalProvider = ({
       window.removeEventListener("mousedown", handler);
     };
   }, [modals, closeOnOutsideClick]);
+
+  useEffect(() => {
+    if (!closeOnRouteChange) return;
+    const handler = () => {
+      modals.forEach((modal) => {
+        modal.reject("route change");
+      });
+    };
+
+    window.addEventListener("popstate", handler);
+    return () => {
+      window.removeEventListener("popstate", handler);
+    };
+  }, [closeOnRouteChange]);
 
   const showModal = modals.length > 0;
   return (
