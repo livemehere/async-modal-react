@@ -33,13 +33,19 @@ yarn add async-modal-react
 ### Wrap your Root Component with ModalProvider
 
 - `closeOnOutsideClick` props is for close modal when click outside of modal(default: true).
+- `disableBodyScrollWhenOpen` props is for disable body scroll when modal is opened(default: true).
+- `closeOnRouteChange` props is for close all modals when route is changed(default: true).
 
 ```jsx
 import { ModalProvider } from "async-modal-react";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <ModalProvider closeOnOutsideClick={true}>
-        <App />
+    <ModalProvider
+      closeOnOutsideClick={true}
+      disableBodyScrollWhenOpen={true}
+      closeOnRouteChange={true}
+    >
+      <App />
     </ModalProvider>,
 );
 ```
