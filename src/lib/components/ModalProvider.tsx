@@ -49,16 +49,14 @@ export const ModalProvider = ({
   useEffect(() => {
     if (!closeOnRouteChange) return;
     const handler = () => {
-      modals.forEach((modal) => {
-        modal.reject("route change");
-      });
+      setModals([]);
     };
 
     window.addEventListener("popstate", handler);
     return () => {
       window.removeEventListener("popstate", handler);
     };
-  }, [closeOnRouteChange, modals]);
+  }, [closeOnRouteChange]);
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
