@@ -18,7 +18,7 @@ export const ModalProvider = ({
 }: Props) => {
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
-  const originStyle = useRef<string>();
+  const originalOverflow = useRef("");
 
   useEffect(() => {
     if (!closeOnOutsideClick) return;
@@ -47,6 +47,7 @@ export const ModalProvider = ({
     };
   }, [modals, closeOnOutsideClick]);
 
+  /* Clear All Modal when popstate change */
   useEffect(() => {
     if (!closeOnRouteChange) return;
     const handler = () => {
@@ -59,22 +60,40 @@ export const ModalProvider = ({
     };
   }, [closeOnRouteChange]);
 
+  /* Disable Scroll */
   useEffect(() => {
-    if (!originStyle.current) {
-      originStyle.current = window.getComputedStyle(
-        document.documentElement,
+    if (originalOverflow.current === "") {
+      originalOverflow.current = window.getComputedStyle(
+        document.body,
       ).overflow;
     }
 
+    function disableScroll(e: Event) {
+      console.log(e);
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
     if (disableBodyScrollWhenOpen && modals.length > 0) {
+      window.addEventListener("wheel", disableScroll, {
+        passive: false,
+      });
+      window.addEventListener("touchmove", disableScroll, {
+        passive: false,
+      });
       document.documentElement.style.overflow = "hidden";
     } else {
-      document.documentElement.style.overflow = originStyle.current;
+      window.removeEventListener("wheel", disableScroll);
+      window.removeEventListener("touchmove", disableScroll);
+      document.documentElement.style.overflow = originalOverflow.current;
+      originalOverflow.current = "";
     }
 
     return () => {
-      document.documentElement.style.overflow = originStyle.current!;
-      originStyle.current = undefined;
+      window.removeEventListener("wheel", disableScroll);
+      window.removeEventListener("touchmove", disableScroll);
+      document.documentElement.style.overflow = originalOverflow.current;
+      originalOverflow.current = "";
     };
   }, [modals, disableBodyScrollWhenOpen]);
 
