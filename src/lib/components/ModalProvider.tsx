@@ -58,7 +58,7 @@ export const ModalProvider = ({
     return () => {
       window.removeEventListener("popstate", handler);
     };
-  }, [closeOnRouteChange]);
+  }, [closeOnRouteChange, modals]);
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
