@@ -3,7 +3,7 @@ import { ModalContext } from "../ModalContext.ts";
 import { ModalProps, ModalType } from "../types/modal.ts";
 
 export const useModal = () => {
-  const { setModals, modalIdRef } = useContext(ModalContext);
+  const { modals, setModals, modalIdRef } = useContext(ModalContext);
 
   const pushModal = <Result = any, Props extends ModalProps = any>(
     component: FC<Props>,
@@ -37,7 +37,7 @@ export const useModal = () => {
   };
 
   const closeAllModals = () => {
-    setModals([]);
+    modals.forEach((modal) => modal.close());
   };
 
   return {
