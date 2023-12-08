@@ -94,15 +94,16 @@ export const ModalProvider = ({
       e.stopPropagation();
     }
 
-    const finallyDisableScroll =
-      modals[modals.length - 1]?.options?.disableScroll !== undefined
-        ? modals[modals.length - 1]?.options?.disableScroll
-        : disableBodyScrollWhenOpen;
-
-    if (finallyDisableScroll && modals.length > 0) {
-      disableScroll();
-    } else {
-      enableScroll();
+    if (modals.length > 0) {
+      const finallyDisableScroll =
+        modals[modals.length - 1].options?.disableScroll !== undefined
+          ? modals[modals.length - 1].options?.disableScroll
+          : disableBodyScrollWhenOpen;
+      if (finallyDisableScroll) {
+        disableScroll();
+      } else {
+        enableScroll();
+      }
     }
 
     return () => {
