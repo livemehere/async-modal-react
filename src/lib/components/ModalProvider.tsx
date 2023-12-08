@@ -19,11 +19,9 @@ export const ModalProvider = ({
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
   const originalOverflow = useRef("");
-  const [disableScrollForce, setDisableScrollForce] = useState(true);
-  const scrollAbleStatus = !disableScrollForce && !disableBodyScrollWhenOpen;
 
+  /* Close Modal when click outside modal.options overwrite global provider props options. */
   useEffect(() => {
-    if (!closeOnOutsideClick) return;
     const modalRoot = document.getElementById("modal-root");
     if (!modalRoot) return;
 
@@ -37,7 +35,12 @@ export const ModalProvider = ({
       }
       if (!flag) {
         const modal = modals[modals.length - 1];
-        if (modal) {
+        const individualModalCloseOnOutsideClick =
+          modal?.options?.onClickOutsideClose !== undefined
+            ? modal.options.onClickOutsideClose
+            : disableBodyScrollWhenOpen;
+
+        if (modal && individualModalCloseOnOutsideClick) {
           modal.reject("click outside");
         }
       }
@@ -47,7 +50,7 @@ export const ModalProvider = ({
     return () => {
       window.removeEventListener("mousedown", handler);
     };
-  }, [modals, closeOnOutsideClick]);
+  }, [modals, closeOnOutsideClick, disableBodyScrollWhenOpen]);
 
   /* Clear All Modal when popstate change */
   useEffect(() => {
@@ -64,39 +67,49 @@ export const ModalProvider = ({
 
   /* Disable Scroll */
   useEffect(() => {
-    if (originalOverflow.current === "") {
-      originalOverflow.current = window.getComputedStyle(
-        document.body,
-      ).overflow;
+    function disableScroll() {
+      if (originalOverflow.current === "") {
+        originalOverflow.current = window.getComputedStyle(
+          document.body,
+        ).overflow;
+      }
+      window.addEventListener("wheel", handler, {
+        passive: false,
+      });
+      window.addEventListener("touchmove", handler, {
+        passive: false,
+      });
+      document.documentElement.style.overflow = "hidden";
     }
 
-    function disableScroll(e: Event) {
+    function enableScroll() {
+      window.removeEventListener("wheel", handler);
+      window.removeEventListener("touchmove", handler);
+      document.documentElement.style.overflow = originalOverflow.current;
+      originalOverflow.current = "";
+    }
+
+    function handler(e: Event) {
       e.preventDefault();
       e.stopPropagation();
     }
 
-    if (disableScrollForce && disableBodyScrollWhenOpen && modals.length > 0) {
-      window.addEventListener("wheel", disableScroll, {
-        passive: false,
-      });
-      window.addEventListener("touchmove", disableScroll, {
-        passive: false,
-      });
-      document.documentElement.style.overflow = "hidden";
+    const hasDisableScrollModal = modals.some(
+      (modal) => modal.options?.disableScroll,
+    );
+    if (
+      (disableBodyScrollWhenOpen || hasDisableScrollModal) &&
+      modals.length > 0
+    ) {
+      disableScroll();
     } else {
-      window.removeEventListener("wheel", disableScroll);
-      window.removeEventListener("touchmove", disableScroll);
-      document.documentElement.style.overflow = originalOverflow.current;
-      originalOverflow.current = "";
+      enableScroll();
     }
 
     return () => {
-      window.removeEventListener("wheel", disableScroll);
-      window.removeEventListener("touchmove", disableScroll);
-      document.documentElement.style.overflow = originalOverflow.current;
-      originalOverflow.current = "";
+      enableScroll();
     };
-  }, [modals, disableBodyScrollWhenOpen, disableScrollForce]);
+  }, [modals, disableBodyScrollWhenOpen]);
 
   const showModal = modals.length > 0;
   return (
@@ -105,8 +118,6 @@ export const ModalProvider = ({
         modals,
         setModals,
         modalIdRef,
-        setDisableScrollForce,
-        scrollAbleStatus,
       }}
     >
       {showModal && (

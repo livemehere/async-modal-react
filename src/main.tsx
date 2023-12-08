@@ -5,9 +5,9 @@ import { ModalProvider } from "./lib/index.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ModalProvider
-    closeOnOutsideClick={true}
-    disableBodyScrollWhenOpen={true}
-    closeOnRouteChange={true}
+    closeOnOutsideClick={false}
+    disableBodyScrollWhenOpen={false}
+    closeOnRouteChange={false}
   >
     <App />
   </ModalProvider>,

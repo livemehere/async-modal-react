@@ -1,14 +1,14 @@
 import { FC, useContext } from "react";
 import { ModalContext } from "../ModalContext.ts";
-import { ModalProps, ModalType } from "../types/modal.ts";
+import { ModalOptions, ModalProps, ModalType } from "../types/modal.ts";
 
 export const useModal = () => {
-  const { setModals, modalIdRef, setDisableScrollForce, scrollAbleStatus } =
-    useContext(ModalContext);
+  const { setModals, modalIdRef } = useContext(ModalContext);
 
   const pushModal = <Result = any, Props extends ModalProps = any>(
     component: FC<Props>,
     props?: Omit<Props, keyof ModalProps>,
+    options?: ModalOptions,
   ) => {
     return new Promise<Result>((resolve, reject) => {
       const modalId = modalIdRef.current++;
@@ -16,6 +16,7 @@ export const useModal = () => {
         id: modalId,
         component,
         props,
+        options,
         close: () => {
           removeModal(modalId);
           reject("Modal closed");
@@ -41,19 +42,8 @@ export const useModal = () => {
     setModals([]);
   };
 
-  const disableScroll = () => {
-    setDisableScrollForce(true);
-  };
-
-  const enableScroll = () => {
-    setDisableScrollForce(false);
-  };
-
   return {
     pushModal,
     closeAllModals,
-    disableScroll,
-    enableScroll,
-    scrollAbleStatus: scrollAbleStatus,
   };
 };

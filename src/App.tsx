@@ -5,9 +5,14 @@ function App() {
   const { pushModal } = useModal();
 
   const openModal = async () => {
-    const result = await pushModal<string, ExampleProps>(ExampleModal, {
-      name: "kong",
-    });
+    const result = await pushModal<string, ExampleProps>(
+      ExampleModal,
+      { name: "kong" },
+      {
+        onClickOutsideClose: true,
+        disableScroll: true,
+      },
+    );
 
     console.log(result);
   };

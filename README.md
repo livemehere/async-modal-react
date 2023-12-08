@@ -138,14 +138,18 @@ export default ExampleModal;
 
 - resolve type can be set by generic type.
 - second generic type is for modal props. (most case is not necessary)
+- `pushModal` function return `Promise<ReturnType>`.
+- options are higher priority than `ModalProvider` props. You can set individually.
 
 ```tsx
-const openModal = async () => {
-    const result = await pushModal<string, ExampleProps>(ExampleModal, {
-        name: "kong",
-    });
-    console.log(result);
-};
+ const result = await pushModal<ReturnType, Props>(
+    ExampleModal, // Modal Component
+    {}, // ExampleModal props
+    { // Individual options
+        onClickOutsideClose: true,
+        disableScroll: true,
+    },
+);
 ```
 
 ## Customizing
@@ -212,31 +216,3 @@ return (
 
 ![multi-modal-absolute.png](demo%2Fmulti-modal-absolute.png)
 
-### Control ScrollAble status
-
-> You can force control scrollAble status by using `disableScroll` and `enableScroll` function.
-
-- Use this, when disable global scrollAble status `true` and sometimes you want to enable scrollAble status `false`
-- ❗️ If you want to use this, you should set `disableBodyScrollWhenOpen` props to `true` when you wrap your root component with `ModalProvider`.
-
-```tsx
-  <ModalProvider disableBodyScrollWhenOpen={true}>
-      <App />
-    </ModalProvider>
-```
-
-```tsx
-const ExampleModal = ({ close, resolve, reject }) => {
-  const { scrollAbleStatus, disableScroll, enableScroll } =
-    useModal();
-  return (
-    <div>
-      <h3>{scrollAbleStatus ? "true" : "false"}</h3>
-      <button onClick={enableScroll}>enableScroll</button>
-      <button onClick={disableScroll}>disableScroll</button>
-    </div>
-  );
-};
-
-export default ExampleModal;
-```
