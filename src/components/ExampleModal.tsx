@@ -9,9 +9,15 @@ const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
   const { pushModal } = useModal();
 
   const openModal = async () => {
-    const result = await pushModal<string, ExampleProps>(ExampleModal, {
-      name: "kong",
-    });
+    const result = await pushModal<string, ExampleProps>(
+      ExampleModal,
+      {
+        name: "kong",
+      },
+      {
+        disableScroll: false,
+      },
+    );
 
     console.log(result);
   };

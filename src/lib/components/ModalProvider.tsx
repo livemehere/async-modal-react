@@ -94,13 +94,12 @@ export const ModalProvider = ({
       e.stopPropagation();
     }
 
-    const hasDisableScrollModal = modals.some(
-      (modal) => modal.options?.disableScroll,
-    );
-    if (
-      (disableBodyScrollWhenOpen || hasDisableScrollModal) &&
-      modals.length > 0
-    ) {
+    const finallyDisableScroll =
+      modals[modals.length - 1]?.options?.disableScroll !== undefined
+        ? modals[modals.length - 1]?.options?.disableScroll
+        : disableBodyScrollWhenOpen;
+
+    if (finallyDisableScroll && modals.length > 0) {
       disableScroll();
     } else {
       enableScroll();
