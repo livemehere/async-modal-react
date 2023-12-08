@@ -211,3 +211,32 @@ return (
 - Two modals are stacked
 
 ![multi-modal-absolute.png](demo%2Fmulti-modal-absolute.png)
+
+### Control ScrollAble status
+
+> You can force control scrollAble status by using `disableScroll` and `enableScroll` function.
+
+- Use this, when disable global scrollAble status `true` and sometimes you want to enable scrollAble status `false`
+- ❗️ If you want to use this, you should set `disableBodyScrollWhenOpen` props to `true` when you wrap your root component with `ModalProvider`.
+
+```tsx
+  <ModalProvider disableBodyScrollWhenOpen={true}>
+      <App />
+    </ModalProvider>
+```
+
+```tsx
+const ExampleModal = ({ close, resolve, reject }) => {
+  const { scrollAbleStatus, disableScroll, enableScroll } =
+    useModal();
+  return (
+    <div>
+      <h3>{scrollAbleStatus ? "true" : "false"}</h3>
+      <button onClick={enableScroll}>enableScroll</button>
+      <button onClick={disableScroll}>disableScroll</button>
+    </div>
+  );
+};
+
+export default ExampleModal;
+```

@@ -19,4 +19,6 @@ export interface ModalContextProps {
   modals: ModalType[];
   setModals: Dispatch<SetStateAction<ModalType[]>>;
   modalIdRef: { current: number };
+  scrollAbleStatus: boolean;
+  setDisableScrollForce: Dispatch<SetStateAction<boolean>>;
 }

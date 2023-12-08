@@ -18,7 +18,7 @@ function App() {
         height: "200vh",
       }}
     >
-      <h1>hello</h1>
+      <h1>Async Modal</h1>
       <button onClick={openModal}>OPEN</button>
     </div>
   );

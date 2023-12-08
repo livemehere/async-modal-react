@@ -19,6 +19,8 @@ export const ModalProvider = ({
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
   const originalOverflow = useRef("");
+  const [disableScrollForce, setDisableScrollForce] = useState(true);
+  const scrollAbleStatus = !disableScrollForce && !disableBodyScrollWhenOpen;
 
   useEffect(() => {
     if (!closeOnOutsideClick) return;
@@ -69,12 +71,11 @@ export const ModalProvider = ({
     }
 
     function disableScroll(e: Event) {
-      console.log(e);
       e.preventDefault();
       e.stopPropagation();
     }
 
-    if (disableBodyScrollWhenOpen && modals.length > 0) {
+    if (disableScrollForce && disableBodyScrollWhenOpen && modals.length > 0) {
       window.addEventListener("wheel", disableScroll, {
         passive: false,
       });
@@ -95,11 +96,19 @@ export const ModalProvider = ({
       document.documentElement.style.overflow = originalOverflow.current;
       originalOverflow.current = "";
     };
-  }, [modals, disableBodyScrollWhenOpen]);
+  }, [modals, disableBodyScrollWhenOpen, disableScrollForce]);
 
   const showModal = modals.length > 0;
   return (
-    <ModalContext.Provider value={{ modals, setModals, modalIdRef }}>
+    <ModalContext.Provider
+      value={{
+        modals,
+        setModals,
+        modalIdRef,
+        setDisableScrollForce,
+        scrollAbleStatus,
+      }}
+    >
       {showModal && (
         <ModalContainer>
           {modals.map((modal) => {

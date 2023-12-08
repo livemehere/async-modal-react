@@ -6,7 +6,8 @@ export interface ExampleProps extends ModalProps {
 }
 
 const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
-  const { pushModal } = useModal();
+  const { pushModal, scrollAbleStatus, disableScroll, enableScroll } =
+    useModal();
 
   const openModal = async () => {
     const result = await pushModal<string, ExampleProps>(ExampleModal, {
@@ -27,6 +28,10 @@ const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
       <button onClick={() => reject("reject T-T")}>REJECT</button>
       <button onClick={close}>Close</button>
       <button onClick={openModal}>OPEN</button>
+      <hr />
+      <h3>{scrollAbleStatus ? "true" : "false"}</h3>
+      <button onClick={enableScroll}>enableScroll</button>
+      <button onClick={disableScroll}>disableScroll</button>
     </div>
   );
 };
