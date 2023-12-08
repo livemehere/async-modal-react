@@ -1,6 +1,6 @@
 # async-modal-react
 
-[![Version](https://img.shields.io/badge/npm-2.0.1-blue)](https://www.npmjs.com/package/async-modal-react)
+[![Version](https://img.shields.io/badge/npm-2.0.3-blue)](https://www.npmjs.com/package/async-modal-react)
 
 This is a simple solution to create a modal in React using hooks and async/await.  
 
@@ -57,6 +57,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 - `close` and `reject` function will reject when using `pushModal` function.
 - `reject` reason and `resolve` value can customize by yourself.
 
+> ❗`close` estimated as `reject`
+
 ```jsx
 
 const ExampleModal = ({ close, resolve, reject }) => {
@@ -85,8 +87,14 @@ function App() {
     const { pushModal, closeAllModals } = useModal();
 
     const openModal = async () => {
-        const result = await pushModal(ExampleModal);
-        console.log(result);
+        try {
+            // resolve
+            const result = await pushModal(ExampleModal);
+            console.log(result);
+        } catch (e) {
+            // reject, close
+            console.log(e);
+        }
     };
 
     return (

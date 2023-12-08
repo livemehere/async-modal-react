@@ -5,16 +5,21 @@ function App() {
   const { pushModal } = useModal();
 
   const openModal = async () => {
-    const result = await pushModal<string, ExampleProps>(
-      ExampleModal,
-      { name: "kong" },
-      {
-        onClickOutsideClose: true,
-        disableScroll: true,
-      },
-    );
-
-    console.log(result);
+    try {
+      // resolve
+      const result = await pushModal<string, ExampleProps>(
+        ExampleModal,
+        { name: "kong" },
+        {
+          onClickOutsideClose: true,
+          disableScroll: true,
+        },
+      );
+      console.log(result);
+    } catch (e) {
+      // reject, close
+      console.log(e);
+    }
   };
 
   return (
