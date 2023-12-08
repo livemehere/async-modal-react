@@ -1,6 +1,6 @@
 {
   "name": "async-modal-react",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "type": "module",
   "description": "A React modal that can be used with Promise.",
   "repository": "https://github.com/livemehere/async-modal-react",
@@ -23,13 +23,17 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "publish": "npm publish --access public"
+    "publish": "npm publish --access public",
+    "test": "jest --watch"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -38,8 +42,11 @@
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
+    "vite-jest": "^0.1.4",
     "vite-plugin-dts": "^3.6.0"
   }
 }

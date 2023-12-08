@@ -104,6 +104,8 @@ export const ModalProvider = ({
       } else {
         enableScroll();
       }
+    } else {
+      enableScroll();
     }
 
     return () => {
