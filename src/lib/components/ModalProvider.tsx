@@ -18,7 +18,6 @@ export const ModalProvider = ({
 }: Props) => {
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
-  const originalOverflow = useRef("");
 
   /* Close Modal when click outside modal.options overwrite global provider props options. */
   useEffect(() => {
@@ -38,7 +37,7 @@ export const ModalProvider = ({
         const individualModalCloseOnOutsideClick =
           modal?.options?.onClickOutsideClose !== undefined
             ? modal.options.onClickOutsideClose
-            : disableBodyScrollWhenOpen;
+            : closeOnOutsideClick;
 
         if (modal && individualModalCloseOnOutsideClick) {
           modal.reject("click outside");
@@ -68,11 +67,6 @@ export const ModalProvider = ({
   /* Disable Scroll */
   useEffect(() => {
     function disableScroll() {
-      if (originalOverflow.current === "") {
-        originalOverflow.current = window.getComputedStyle(
-          document.body,
-        ).overflow;
-      }
       window.addEventListener("wheel", handler, {
         passive: false,
       });
@@ -85,8 +79,7 @@ export const ModalProvider = ({
     function enableScroll() {
       window.removeEventListener("wheel", handler);
       window.removeEventListener("touchmove", handler);
-      document.documentElement.style.overflow = originalOverflow.current;
-      originalOverflow.current = "";
+      document.documentElement.style.overflow = "visible";
     }
 
     function handler(e: Event) {
@@ -104,6 +97,8 @@ export const ModalProvider = ({
       } else {
         enableScroll();
       }
+    } else {
+      enableScroll();
     }
 
     return () => {

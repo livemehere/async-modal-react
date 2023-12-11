@@ -18,7 +18,6 @@ const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
         disableScroll: false,
       },
     );
-
     console.log(result);
   };
   return (
@@ -26,11 +25,12 @@ const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
       style={{
         background: "#fff",
         position: "absolute",
+        color: "#000",
       }}
     >
       <h2>ExampleModal</h2>
       <button onClick={() => resolve(`resolve! ${name}`)}>RESOLVE</button>
-      <button onClick={() => reject("reject T-T")}>REJECT</button>
+      <button onClick={() => reject("reject")}>REJECT</button>
       <button onClick={close}>Close</button>
       <button onClick={openModal}>OPEN</button>
       <hr />
