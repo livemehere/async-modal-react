@@ -37,7 +37,7 @@ export const ModalProvider = ({
         const individualModalCloseOnOutsideClick =
           modal?.options?.onClickOutsideClose !== undefined
             ? modal.options.onClickOutsideClose
-            : disableBodyScrollWhenOpen;
+            : closeOnOutsideClick;
 
         if (modal && individualModalCloseOnOutsideClick) {
           modal.reject("click outside");

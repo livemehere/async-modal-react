@@ -18,7 +18,6 @@ const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
         disableScroll: false,
       },
     );
-
     console.log(result);
   };
   return (
@@ -26,6 +25,7 @@ const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
       style={{
         background: "#fff",
         position: "absolute",
+        color: "#000",
       }}
     >
       <h2>ExampleModal</h2>
