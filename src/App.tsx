@@ -7,14 +7,9 @@ function App() {
   const openModal = async () => {
     try {
       // resolve
-      const result = await pushModal<string, ExampleProps>(
-        ExampleModal,
-        { name: "kong" },
-        {
-          onClickOutsideClose: true,
-          disableScroll: true,
-        },
-      );
+      const result = await pushModal<string, ExampleProps>(ExampleModal, {
+        name: "kong",
+      });
       console.log(result);
     } catch (e) {
       // reject, close

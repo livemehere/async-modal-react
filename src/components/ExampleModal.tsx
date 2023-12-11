@@ -30,7 +30,7 @@ const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
     >
       <h2>ExampleModal</h2>
       <button onClick={() => resolve(`resolve! ${name}`)}>RESOLVE</button>
-      <button onClick={() => reject("reject T-T")}>REJECT</button>
+      <button onClick={() => reject("reject")}>REJECT</button>
       <button onClick={close}>Close</button>
       <button onClick={openModal}>OPEN</button>
       <hr />
