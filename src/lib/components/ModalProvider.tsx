@@ -85,7 +85,7 @@ export const ModalProvider = ({
       window.removeEventListener("wheel", handler);
       window.removeEventListener("touchmove", handler);
 
-      document.documentElement.style.overflow = "auto";
+      document.documentElement.style.overflow = "visible";
     }
 
     function handler(e: Event) {
