@@ -11,10 +11,11 @@ export default defineConfig({
     }),
   ],
   build: {
+    emptyOutDir: true,
     lib: {
       entry: "src/lib/index.ts",
       fileName: "index",
-      formats: ["es","cjs"],
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
       external: ["react", "react-dom"],
