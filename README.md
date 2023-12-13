@@ -2,7 +2,7 @@
 
 ![async-modal-react.png](async-modal-react.png)
 
-[![Version](https://img.shields.io/badge/npm-2.1.5-blue)](https://www.npmjs.com/package/async-modal-react)
+[![Version](https://img.shields.io/badge/npm-2.1.6-blue)](https://www.npmjs.com/package/async-modal-react)
 
 [Documentation - livemehere-dev-packs](https://livemehere.github.io/livemehere-dev-packs/docs/category/async-modal-react)
 
@@ -160,6 +160,7 @@ export default ExampleModal;
     { // Individual options
         onClickOutsideClose: true,
         disableScroll: true,
+        enableInsideScroll: true, // use this when global disableScroll is true but you want to enable scroll in this modal.
     },
 );
 ```
