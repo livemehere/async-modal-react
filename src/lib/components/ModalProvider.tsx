@@ -79,7 +79,9 @@ export const ModalProvider = ({
     function enableScroll() {
       window.removeEventListener("wheel", handler);
       window.removeEventListener("touchmove", handler);
-      document.documentElement.style.overflow = "visible";
+      if (document.documentElement.style.overflow === "hidden") {
+        document.documentElement.style.overflow = "auto";
+      }
     }
 
     function handler(e: Event) {
