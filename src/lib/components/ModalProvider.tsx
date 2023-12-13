@@ -66,22 +66,26 @@ export const ModalProvider = ({
 
   /* Disable Scroll */
   useEffect(() => {
-    function disableScroll() {
-      window.addEventListener("wheel", handler, {
-        passive: false,
-      });
-      window.addEventListener("touchmove", handler, {
-        passive: false,
-      });
-      document.documentElement.style.overflow = "hidden";
+    function disableScroll(preventEvent = true, preventStyle = true) {
+      if (preventEvent) {
+        window.addEventListener("wheel", handler, {
+          passive: false,
+        });
+        window.addEventListener("touchmove", handler, {
+          passive: false,
+        });
+      }
+
+      if (preventStyle) {
+        document.documentElement.style.overflow = "hidden";
+      }
     }
 
     function enableScroll() {
       window.removeEventListener("wheel", handler);
       window.removeEventListener("touchmove", handler);
-      if (document.documentElement.style.overflow === "hidden") {
-        document.documentElement.style.overflow = "auto";
-      }
+
+      document.documentElement.style.overflow = "auto";
     }
 
     function handler(e: Event) {
@@ -94,8 +98,12 @@ export const ModalProvider = ({
         modals[modals.length - 1].options?.disableScroll !== undefined
           ? modals[modals.length - 1].options?.disableScroll
           : disableBodyScrollWhenOpen;
+
+      const preventEvent =
+        modals[modals.length - 1].options?.enableInsideScroll !== true;
+
       if (finallyDisableScroll) {
-        disableScroll();
+        disableScroll(preventEvent, true);
       } else {
         enableScroll();
       }

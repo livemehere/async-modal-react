@@ -11,6 +11,7 @@ export interface ModalProps {
 export interface ModalOptions {
   onClickOutsideClose?: boolean;
   disableScroll?: boolean;
+  enableInsideScroll?: boolean;
 }
 
 /* Modal 을 관리하는 배열의 타입 */
