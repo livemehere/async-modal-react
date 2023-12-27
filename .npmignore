@@ -24,3 +24,6 @@ vite.config.ts
 .idea
 
 **/*.png
+
+jest.config.js
+jest.setup.ts
