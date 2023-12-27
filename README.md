@@ -1,6 +1,6 @@
 # async-modal-react
 
-![async-modal-react.png](async-modal-react.png)
+![async-modal-react.png](https://github.com/livemehere/async-modal-react/blob/master/async-modal-react.png?raw=true)
 
 [![Version](https://img.shields.io/badge/npm-2.1.6-blue)](https://www.npmjs.com/package/async-modal-react)
 
@@ -12,7 +12,7 @@ This is a simple solution to create a modal in React using hooks and async/await
 
 ## Demo
 
-![demo.gif](demo%2Fdemo.gif)
+![demo.gif](https://github.com/livemehere/async-modal-react/blob/master/demo/demo.gif?raw=true)
 
 ## Short Description
 
