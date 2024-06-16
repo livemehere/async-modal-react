@@ -113,6 +113,15 @@ export default App;
 
 ## Typescript Support
 
+### tsconfig.json
+
+```json
+"typeRoots": ["./node_modules"]
+```
+
+> include node_modules in typesRoots
+
+
 ### Modal Component Props
 
 - import `ModalProps` from `async-modal-react/types/modal` and extend your props interface.
