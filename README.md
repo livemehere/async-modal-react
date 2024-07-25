@@ -155,6 +155,15 @@ const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
 export default ExampleModal;
 ```
 
+> If can't not find `"async-modal-react/types/modal"`, fix tsconfig.json like this
+
+```json
+{
+    ...
+    "typeRoots": ["node_modules","../../node_modules"] // if your package in monorepo, add top-level node_modules
+}
+```
+
 ### Hooks
 
 - resolve type can be set by generic type.
