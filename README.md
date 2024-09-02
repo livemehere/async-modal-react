@@ -113,18 +113,9 @@ export default App;
 
 ## Typescript Support
 
-### tsconfig.json
-
-```json
-"typeRoots": ["./node_modules"]
-```
-
-> include node_modules in typesRoots
-
-
 ### Modal Component Props
 
-- import `ModalProps` from `async-modal-react/types/modal` and extend your props interface.
+- import `ModalProps` from `async-modal-react` and extend your props interface.
 
 ```ts
 export interface ModalProps {
@@ -135,7 +126,7 @@ export interface ModalProps {
 ```
 
 ```tsx
-import { ModalProps } from "async-modal-react/types/modal";
+import { ModalProps } from "async-modal-react";
 
 export interface ExampleProps extends ModalProps {
   name: string;
@@ -153,15 +144,6 @@ const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
 };
 
 export default ExampleModal;
-```
-
-> If can't not find `"async-modal-react/types/modal"`, fix tsconfig.json like this
-
-```json
-{
-    ...
-    "typeRoots": ["node_modules","../../node_modules"] // if your package in monorepo, add top-level node_modules
-}
 ```
 
 ### Hooks
