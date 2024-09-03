@@ -1,11 +1,10 @@
 import { FC, useContext } from "react";
 import { ModalContext } from "../ModalContext.ts";
 import { ModalOptions, ModalProps, ModalType } from "../types/modal.ts";
-
 export const useModal = () => {
   const { setModals, modalIdRef } = useContext(ModalContext);
 
-  const pushModal = <Result = any, Props extends ModalProps = any>(
+  const pushModal = <Result, Props extends ModalProps>(
     component: FC<Props>,
     props?: Omit<Props, keyof ModalProps>,
     options?: ModalOptions,

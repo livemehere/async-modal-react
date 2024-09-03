@@ -128,7 +128,7 @@ export const ModalProvider = ({
       {showModal && (
         <ModalContainer>
           {modals.map((modal) => {
-            return createElement<ModalProps & any>(modal.component, {
+            return createElement<ModalProps>(modal.component, {
               ...modal.props,
               close: modal.close,
               resolve: modal.resolve,
