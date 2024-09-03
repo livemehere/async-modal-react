@@ -5,4 +5,5 @@ export const ModalContext = createContext<ModalContextProps>({
   modals: [],
   setModals: () => {},
   modalIdRef: { current: 0 },
+  errorOnClose: false,
 });

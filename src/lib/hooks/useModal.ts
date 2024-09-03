@@ -2,9 +2,9 @@ import { FC, useContext } from "react";
 import { ModalContext } from "../ModalContext.ts";
 import { ModalOptions, ModalProps, ModalType } from "../types/modal.ts";
 export const useModal = () => {
-  const { setModals, modalIdRef } = useContext(ModalContext);
+  const { setModals, modalIdRef, errorOnClose } = useContext(ModalContext);
 
-  const pushModal = <Result, Props extends ModalProps>(
+  const open = <Result, Props extends ModalProps>(
     component: FC<Props>,
     props?: Omit<Props, keyof ModalProps>,
     options?: ModalOptions,
@@ -17,15 +17,24 @@ export const useModal = () => {
         props,
         options,
         close: () => {
-          removeModal(modalId);
-          reject("Modal closed");
+          close(modalId);
+          const individualErrorOnClose = options?.errorOnClose;
+          if (individualErrorOnClose === undefined) {
+            if (errorOnClose) {
+              reject("close");
+            }
+          } else {
+            if (individualErrorOnClose) {
+              reject("close");
+            }
+          }
         },
         resolve: (value) => {
-          removeModal(modalId);
+          close(modalId);
           resolve(value as unknown as Result);
         },
         reject: (reason) => {
-          removeModal(modalId);
+          close(modalId);
           reject(reason);
         },
       };
@@ -33,16 +42,16 @@ export const useModal = () => {
     });
   };
 
-  const removeModal = (id: number) => {
+  const close = (id: number) => {
     setModals((prev) => prev.filter((modal) => modal.id !== id));
   };
 
-  const closeAllModals = () => {
+  const closeAll = () => {
     setModals([]);
   };
 
   return {
-    pushModal,
-    closeAllModals,
+    open,
+    closeAll,
   };
 };

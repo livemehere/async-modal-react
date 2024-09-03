@@ -34,7 +34,7 @@ describe("Close onClick outSide Test", () => {
       expect(modal).toBeInTheDocument();
     });
 
-    it("Modal must not be close when click outside modal when pushModal called with `onClickOutsideClose:false` option.", () => {
+    it("Modal must not be close when click outside modal when open called with `onClickOutsideClose:false` option.", () => {
       const openButton = screen.getByText("OPEN - disableClose");
       fireEvent.click(openButton);
 
@@ -77,7 +77,7 @@ describe("Close onClick outSide Test", () => {
       expect(modal).toBeInTheDocument();
     });
 
-    it("Modal must be close when click outside modal when pushModal called with `onClickOutsideClose:true` option.", () => {
+    it("Modal must be close when click outside modal when open called with `onClickOutsideClose:true` option.", () => {
       const openButton = screen.getByText("OPEN - enableClose");
       fireEvent.click(openButton);
 

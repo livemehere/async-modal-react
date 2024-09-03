@@ -12,6 +12,7 @@ export interface ModalOptions {
   onClickOutsideClose?: boolean;
   disableScroll?: boolean;
   enableInsideScroll?: boolean;
+  errorOnClose?: boolean;
 }
 
 /* Modal 을 관리하는 배열의 타입 */
@@ -27,4 +28,5 @@ export interface ModalContextProps {
   modals: ModalType[];
   setModals: Dispatch<SetStateAction<ModalType[]>>;
   modalIdRef: { current: number };
+  errorOnClose: boolean;
 }

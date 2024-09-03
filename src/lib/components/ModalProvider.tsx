@@ -8,6 +8,7 @@ interface Props {
   closeOnOutsideClick?: boolean;
   closeOnRouteChange?: boolean;
   disableBodyScrollWhenOpen?: boolean;
+  errorOnClose?: boolean;
 }
 
 export const ModalProvider = ({
@@ -15,6 +16,7 @@ export const ModalProvider = ({
   closeOnOutsideClick = true,
   closeOnRouteChange = true,
   disableBodyScrollWhenOpen = true,
+  errorOnClose = false,
 }: Props) => {
   const [modals, setModals] = useState<ModalType[]>([]);
   const modalIdRef = useRef(0);
@@ -40,7 +42,19 @@ export const ModalProvider = ({
             : closeOnOutsideClick;
 
         if (modal && individualModalCloseOnOutsideClick) {
-          modal.reject("click outside");
+          if (modal.options?.errorOnClose === undefined) {
+            if (errorOnClose) {
+              modal.reject("close");
+            } else {
+              modal.close();
+            }
+          } else {
+            if (modal.options.errorOnClose) {
+              modal.reject("close");
+            } else {
+              modal.close();
+            }
+          }
         }
       }
     };
@@ -123,6 +137,7 @@ export const ModalProvider = ({
         modals,
         setModals,
         modalIdRef,
+        errorOnClose,
       }}
     >
       {showModal && (
