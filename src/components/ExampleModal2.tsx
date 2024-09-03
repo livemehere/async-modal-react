@@ -6,11 +6,11 @@ export interface ExampleProps extends ModalProps {
 }
 
 const ExampleModal2 = ({ close, resolve, reject, name }: ExampleProps) => {
-  const { pushModal } = useModal();
+  const { open } = useModal();
 
   /* 또 다른 모달 열기 */
   const openOtherModal = async () => {
-    const result = await pushModal(ExampleModal2);
+    const result = await open(ExampleModal2);
     console.log(result);
   };
 

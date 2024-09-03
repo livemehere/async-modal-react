@@ -6,10 +6,10 @@ export interface ExampleProps extends ModalProps {
 }
 
 const ExampleModal = ({ close, resolve, reject, name }: ExampleProps) => {
-  const { pushModal } = useModal();
+  const { open } = useModal();
 
   const openModal = async () => {
-    const result = await pushModal<string, ExampleProps>(
+    const result = await open(
       ExampleModal,
       {
         name: "kong",

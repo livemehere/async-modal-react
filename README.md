@@ -39,6 +39,7 @@ yarn add async-modal-react
 - `closeOnOutsideClick` props is for close modal when click outside of modal(default: true).
 - `disableBodyScrollWhenOpen` props is for disable body scroll when modal is opened(default: true).
 - `closeOnRouteChange` props is for close all modals when route is changed(default: true).
+- `errorOnClose` props is for throw error when modal is closed by clicking outside of modal or route change(default: false).
 
 ```jsx
 import { ModalProvider } from "async-modal-react";
@@ -57,8 +58,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 ### Create Your Modal Component
 
 - Component that used for modal receive 3 props: `close`, `resolve`, `reject`.
-- `resolve` function will return value when using `pushModal` function.
-- `close` and `reject` function will reject when using `pushModal` function.
+- `resolve` function will return value when using `open` function.
+- `close` and `reject` function will reject when using `open` function.
 - `reject` reason and `resolve` value can customize by yourself.
 
 > ❗`close` estimated as `reject`
@@ -81,19 +82,19 @@ export default ExampleModal;
 
 ### Use Modal with Hooks
 
-- `useModal` hook return `pushModal` and `closeAllModals` function.
+- `useModal` hook return `open` and `closeAll` function.
 
 ```jsx
 import ExampleModal from "./components/ExampleModal";
 import { useModal } from "async-modal-react";
 
 function App() {
-    const { pushModal, closeAllModals } = useModal();
+    const { open, closeAll } = useModal();
 
     const openModal = async () => {
         try {
             // resolve
-            const result = await pushModal(ExampleModal);
+            const result = await open(ExampleModal);
             console.log(result);
         } catch (e) {
             // reject, close
@@ -150,17 +151,18 @@ export default ExampleModal;
 
 - resolve type can be set by generic type.
 - second generic type is for modal props. (most case is not necessary)
-- `pushModal` function return `Promise<ReturnType>`.
+- `open` function return `Promise<ReturnType>`.
 - options are higher priority than `ModalProvider` props. You can set individually.
 
 ```tsx
- const result = await pushModal<ReturnType, Props>(
+ const result = await open<ReturnType, Props>(
     ExampleModal, // Modal Component
     {}, // ExampleModal props
     { // Individual options
         onClickOutsideClose: true,
         disableScroll: true,
         enableInsideScroll: true, // use this when global disableScroll is true but you want to enable scroll in this modal.
+        errorOnClose: true,
     },
 );
 ```

@@ -1,27 +1,27 @@
-import ExampleModal, { ExampleProps } from "./components/ExampleModal.tsx";
+import ExampleModal from "./components/ExampleModal.tsx";
 import { useModal } from "./lib/index.ts";
 
 function App() {
-  const { pushModal } = useModal();
+  const { open } = useModal();
 
   const openModal = async (disableScroll?: boolean, closeOnClick?: boolean) => {
-    try {
-      // resolve
-      const result = await pushModal<string, ExampleProps>(
-        ExampleModal,
-        {
-          name: "kong",
-        },
-        {
-          disableScroll: disableScroll,
-          onClickOutsideClose: closeOnClick,
-        },
-      );
-      console.log(result);
-    } catch (e) {
-      // reject, close
-      console.log(e);
-    }
+    open(
+      ExampleModal,
+      {
+        name: "kong",
+      },
+      {
+        disableScroll: disableScroll,
+        onClickOutsideClose: closeOnClick,
+        errorOnClose: true,
+      },
+    )
+      .then((result) => {
+        console.log("resolve", result);
+      })
+      .catch((reason) => {
+        console.log("reject", reason);
+      });
   };
 
   return (
