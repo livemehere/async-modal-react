@@ -1,12 +1,12 @@
-import { FC, useContext } from "react";
+import { FunctionComponent, useContext } from "react";
 import { ModalContext } from "../ModalContext.ts";
 import { ModalOptions, ModalProps, ModalType } from "../types/modal.ts";
 export const useModal = () => {
   const { setModals, modalIdRef, errorOnClose } = useContext(ModalContext);
 
-  const open = <Result, Props extends ModalProps>(
-    component: FC<Props>,
-    props?: Omit<Props, keyof ModalProps>,
+  const open = <Result, Comp extends FunctionComponent<any>>(
+    component: Comp,
+    props?: Omit<React.ComponentProps<Comp>, keyof ModalProps>,
     options?: ModalOptions,
   ) => {
     return new Promise<Result>((resolve, reject) => {
