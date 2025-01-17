@@ -25,11 +25,10 @@ This is a simple solution to create a modal in React using hooks and async/await
 - No dependencies except React.
 
 ## Install
-
+ 
 ```bash
-npm install async-modal-react
-
-yarn add async-modal-react
+npm install async-modal-react@3 # react <=18
+npm install async-modal-react@latest # react >=19
 ```
 
 ## Usage

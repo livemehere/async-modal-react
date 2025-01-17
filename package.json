@@ -1,6 +1,6 @@
 {
   "name": "async-modal-react",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "type": "module",
   "description": "A React modal that can be used with Promise.",
   "repository": "https://github.com/livemehere/async-modal-react",
@@ -28,8 +28,8 @@
     "test": "jest --watch"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.5",
@@ -49,5 +49,6 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
     "vite-plugin-dts": "^3.6.0"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
