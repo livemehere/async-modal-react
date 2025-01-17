@@ -2,8 +2,6 @@
 
 ![async-modal-react.png](https://github.com/livemehere/async-modal-react/blob/master/async-modal-react.png?raw=true)
 
-[![Version](https://img.shields.io/badge/npm-2.1.7-blue)](https://www.npmjs.com/package/async-modal-react)
-
 [Documentation - livemehere-dev-packs](https://livemehere.github.io/livemehere-dev-packs/docs/category/async-modal-react)
 
 This is a simple solution to create a modal in React using hooks and async/await.  

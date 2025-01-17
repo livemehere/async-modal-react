@@ -1,6 +1,6 @@
 {
   "name": "async-modal-react",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "type": "module",
   "description": "A React modal that can be used with Promise.",
   "repository": "https://github.com/livemehere/async-modal-react",
